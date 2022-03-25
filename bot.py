@@ -100,13 +100,12 @@ async def mute(ctx, member: Option(discord.Member, "The user to mute")):
 	await ctx.respond(f'{str(member)} has been muted.', ephemeral=True)
 
 @client.slash_command()
-@permissions.permission(manage_messages = True)
+@commands.has_guild_permissions(manage_messages=True)
 async def clear(ctx, amount: Option(int, "The amount of messages to remove", default=2)):
 	await ctx.channel.purge(limit=amount)
 
 
 
-#######################################################EVENTS############################################################
 
 @client.event
 async def on_command_error(ctx, error):
